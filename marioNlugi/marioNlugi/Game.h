@@ -34,10 +34,13 @@ private:
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
 	sf::Text m_welcomeMessage; // text used for message on screen
-	sf::Texture m_logoTexture; // texture used for sfml logo
-	sf::Sprite m_logoSprite; // sprite used for sfml logo
-	bool m_exitGame; // control exiting game
+	
 
+	sf::Texture m_marioTexure; // marios image file
+	sf::Sprite m_marioSprite; // sprite to draw mario
+
+	bool m_exitGame; // control exiting game
+	sf::Vector2f m_location{300.0f, 200.0f};
 };
 
 #endif // !GAME_HPP
