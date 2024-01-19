@@ -103,6 +103,8 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	checkDirection();
+	move();
 }
 
 /// <summary>
@@ -117,6 +119,46 @@ void Game::render()
 	
 	m_window.draw(m_marioSprite);
 	m_window.display();
+}
+
+void Game::move()
+{
+	sf::Vector2f movement{0.0f, 0.0f};
+	float speed = 2.3f;
+	switch (m_direction)
+	{
+	case Direction::None:
+		break;
+	case Direction::Up:
+		movement.y = -speed;
+		break;
+	case Direction::Left:
+		break;
+	case Direction::Right:
+		break;
+	case Direction::Down:
+		movement.y = speed;
+		break;
+	default:
+		break;
+	}
+	m_location += movement;
+	m_marioSprite.setPosition(m_location);
+}
+
+void Game::checkDirection()
+{
+	m_direction = Direction::None;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)
+		|| sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		m_direction = Direction::Up;
+	}
+	if (sf::Keyboard::isKeyPressed((sf::Keyboard::Down)))
+	{
+		m_direction = Direction::Down;
+	}
+
 }
 
 /// <summary>
@@ -153,6 +195,6 @@ void Game::setupSprite()
 	m_marioSprite.setPosition(m_location);
 
 	
-
+	
 
 }
