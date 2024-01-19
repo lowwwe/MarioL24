@@ -35,9 +35,11 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
+	void processReleaseKeys(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	void move();
+	void changeCharacter();
 
 	
 
@@ -57,6 +59,9 @@ private:
 
 	bool m_exitGame; // control exiting game
 	sf::Vector2f m_location{300.0f, 200.0f};
+
+	bool m_isMario = true;
+	bool m_canChange = true;
 };
 
 #endif // !GAME_HPP

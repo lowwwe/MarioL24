@@ -77,6 +77,10 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
+		if (sf::Event::KeyReleased == newEvent.type)
+		{
+			processReleaseKeys(newEvent);
+		}
 	}
 }
 
@@ -90,6 +94,18 @@ void Game::processKeys(sf::Event t_event)
 	if (sf::Keyboard::Escape == t_event.key.code)
 	{
 		m_exitGame = true;
+	}
+	if (sf::Keyboard::Space == t_event.key.code)
+	{
+		changeCharacter();
+	}
+}
+
+void Game::processReleaseKeys(sf::Event t_event)
+{
+	if (sf::Keyboard::Space == t_event.key.code)
+	{
+		m_canChange = true;
 	}
 }
 
@@ -146,6 +162,23 @@ void Game::move()
 	m_marioSprite.setPosition(m_location);
 }
 
+void Game::changeCharacter()
+{
+	if (m_canChange)
+	{
+		if (m_isMario)
+		{
+			m_marioSprite.setTextureRect(sf::IntRect(64, 0, 64, 148));
+		}
+		else
+		{
+			m_marioSprite.setTextureRect(sf::IntRect(0, 0, 64, 148));
+		}
+		m_isMario = !m_isMario;
+		m_canChange = false;
+	}
+}
+
 void Game::checkDirection()
 {
 	m_direction = Direction::None;
@@ -192,6 +225,7 @@ void Game::setupSprite()
 		std::cout << "No mario" << std::endl;
 	}
 	m_marioSprite.setTexture(m_marioTexure);
+	m_marioSprite.setTextureRect(sf::IntRect(0, 0, 64, 148));
 	m_marioSprite.setPosition(m_location);
 
 	
